@@ -17,7 +17,7 @@ $(BINARY):
 	go build -v -o ./bin/${BINARY} ./src/main.go
 
 run:
-	go run ./src/main.go
+	cd src ; go run ./main.go
 
 # https://github.com/golang/lint
 # go get github.com/golang/lint/golint

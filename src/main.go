@@ -6,8 +6,21 @@
 
 package main
 
-import "fmt"
+import (
+	"net/http"
+
+	"./controller"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/dev/dbcon"
+)
 
 func main() {
-  fmt.Println("Hello, Eddie Fisher!")
+	db := dbcon.Connection()
+	defer db.Close()
+
+	http.HandleFunc("/", controller.PostsIndex)
+	http.HandleFunc("/post/", controller.PostsShow)
+
+	logrus.Fatal(http.ListenAndServe(":3000", nil))
 }
