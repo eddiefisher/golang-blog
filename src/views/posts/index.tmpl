@@ -1,4 +1,8 @@
-{{ define "title"}}<title>Posts</title>{{ end }}
+{{ define "title"}}<title>{{.Title}}</title>{{ end }}
 {{ define "content" }}
-    test index
+    {{range .Content}}
+        <h3>{{ .Title }} <small>{{ .Createdat.Format "2006 Jan 02" }}</small></h3>
+        <p>{{ .Body }}</p>
+        <hr>
+    {{ end }}
 {{ end }}

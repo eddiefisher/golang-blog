@@ -1,5 +1,7 @@
-{{ define "title"}}<title>Show Page</title>{{ end }}
+{{ define "title"}}<title>{{.Title}}</title>{{ end }}
 {{ define "content" }}
-    test show
-    {{ .Content }}
+    {{range .Content}}
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Body }}</p>
+    {{end}}
 {{ end }}

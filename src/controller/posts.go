@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"../model"
 	"github.com/dev/utils"
 )
 
@@ -15,9 +16,11 @@ func PostsIndex(w http.ResponseWriter, r *http.Request) {
 		utils.PageNotFound(w, r, http.StatusNotFound)
 		return
 	}
+	var posts model.Posts
+
 	utils.RenderTemplate("posts", "index").ExecuteTemplate(w, "layout", map[string]interface{}{
 		"Title":   "All Posts",
-		"Content": "Lorem Ipsum",
+		"Content": posts.All(),
 	})
 }
 
@@ -33,8 +36,13 @@ func PostsShow(w http.ResponseWriter, r *http.Request) {
 		utils.PageNotFound(w, r, http.StatusNotFound)
 		return
 	}
+
+	var post model.Post
+	post.Find(id)
+	posts := model.Posts{post}
+
 	utils.RenderTemplate("posts", "show").ExecuteTemplate(w, "layout", map[string]interface{}{
-		"Title":   "Post " + strconv.Itoa(id),
-		"Content": "show: " + strconv.Itoa(id),
+		"Title":   "Post " + strconv.Itoa(post.ID),
+		"Content": posts,
 	})
 }

@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/Sirupsen/logrus"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" //pg
 )
 
 const (
@@ -17,6 +17,7 @@ const (
 	sslmode  = "disable"
 )
 
+//Connection connect to pg db
 func Connection() *sql.DB {
 	var dbinfo string
 	if password == "" {
